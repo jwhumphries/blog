@@ -1,0 +1,86 @@
+baseURL: https://jwhumphries.github.io/blog/
+languageCode: en-us
+title: My Hugo Site
+theme: PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+mainsections: ["posts"]
+
+minify:
+  disableXML: true
+
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
+    menu:
+      main:
+        - name: Archive
+          url: archives
+          weight: 5
+        - name: Search
+          url: search/
+          weight: 10
+        - name: Tags
+          url: tags/
+          weight: 10
+
+params:
+  env: production
+  title: jwh blog
+  description: All things jwh
+  author: John Humphries
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  ShowPageNums: true
+  ShowAllPagesInArchive: true
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  ShowToc: false
+
+  homeInfoParams:
+    Title: Welcome to My Blog
+    Content: This is a Hugo site built with PaperMod theme
+  socialIcons:
+    - name: github
+      url: https://github.com/jwhumphries
+menu:
+  main:
+    - identifier: posts
+      name: Posts
+      url: /posts/
+      weight: 10
+    - identifier: categories
+      name: Categories
+      url: /categories/
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 30
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
