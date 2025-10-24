@@ -1,6 +1,6 @@
 baseURL: https://blog.john-humphries.com/
 languageCode: en-us
-title: My Hugo Site
+title: JWH
 theme: PaperMod
 
 enableInlineShortcodes: true
@@ -24,8 +24,11 @@ languages:
       series: series
     menu:
       main:
+        - name: Posts
+          url: posts/
+          weight: 1
         - name: Archive
-          url: archives
+          url: archives/
           weight: 5
         - name: Search
           url: search/
@@ -52,32 +55,15 @@ params:
   comments: false
   hidemeta: false
   hideSummary: false
-  ShowToc: false
 
   homeInfoParams:
-    Title: Welcome to My Blog
-    Content: This is a Hugo site built with PaperMod theme
+    Title: John Humphries' Blog
+    Content: >
+      Welcome to my blog. I hope to share all that is mine.
   socialIcons:
     - name: github
       url: https://github.com/jwhumphries
-menu:
-  main:
-    - identifier: posts
-      name: Posts
-      url: /posts/
-      weight: 10
-    - identifier: categories
-      name: Categories
-      url: /categories/
-      weight: 10
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 20
-    - identifier: archives
-      name: Archives
-      url: /archives/
-      weight: 30
+
 outputs:
   home:
     - HTML
