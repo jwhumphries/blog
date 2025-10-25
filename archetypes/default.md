@@ -5,7 +5,7 @@ author: 'John Humphries'
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
 description: ''
 tags: []
-categories: ['{{ .Parent }}']
+categories: ['{{ replace .Dir "/" "" }}']
 ShowToc: true
 TocOpen: true
 ---

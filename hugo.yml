@@ -14,33 +14,33 @@ mainsections: ["posts"]
 minify:
   disableXML: true
 
-languages:
-  en:
-    languageName: "English"
-    weight: 1
-    taxonomies:
-      category: categories
-      tag: tags
-      series: series
-    menu:
-      main:
-        - name: Posts
-          url: posts/
-          weight: 1
-        - name: Archive
-          url: archives/
-          weight: 5
-        - name: Search
-          url: search/
-          weight: 10
-        - name: Tags
-          url: tags/
-          weight: 10
+taxonomies:
+  category: categories
+  tag: tags
+  series: series
+
+menu:
+  main:
+    - name: About
+      url: about/
+      weight: 1
+    - name: Posts
+      url: posts/
+      weight: 5
+    - name: Archive
+      url: archives/
+      weight: 10
+    - name: Search
+      url: search/
+      weight: 15
+    - name: Tags
+      url: tags/
+      weight: 15
 
 params:
   env: production
   title: jwh blog
-  description: All things jwh
+  description: a blog by jwh
   author: John Humphries
   defaultTheme: auto
   ShowReadingTime: true
@@ -56,10 +56,12 @@ params:
   hidemeta: false
   hideSummary: false
 
-  homeInfoParams:
-    Title: John Humphries' Blog
-    Content: >
-      Welcome to my blog. I hope to share all that is mine.
+  profileMode:
+    enabled: false
+    
+  # homeInfoParams:
+    # Title: Welcome
+    # Content: I hope to share all that is mine.
   socialIcons:
     - name: github
       url: https://github.com/jwhumphries

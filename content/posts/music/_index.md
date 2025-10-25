@@ -1,5 +1,11 @@
 ---
 title: Music
-summary: Contains posts related to `Music`
-description: Contains posts related to Music
+summary: Music and More
+description: Music and More
+menu:
+  main:
+    name: Music
+    pageRef: /posts/music
+    parent: Posts
+    weight: 30
 ---
