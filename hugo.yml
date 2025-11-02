@@ -37,7 +37,7 @@ menu:
 params:
   author:
     name: John Humphries
-    image: assets/me.jpeg
+    image: me.jpeg
   colorScheme: congo
   defaultThemecolor: '#FFFFFF'
   defaultAppearance: light
@@ -46,6 +46,7 @@ params:
   enableCodeCopy: true
   header:
     showTitle: true
+    logo: logo.png
   footer:
     showAppearanceSwitcher: true
   homepage:
