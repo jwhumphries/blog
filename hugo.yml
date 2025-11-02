@@ -14,7 +14,7 @@ minify:
   disableXML: true
 
 taxonomies:
-  category: categories
+  topic: topics
   tag: tags
   series: series
 
@@ -26,6 +26,9 @@ menu:
     - name: Posts
       pageRef: posts
       weight: 5
+    - name: Tags
+      pageRef: tags
+      weight: 20
     - identifier: search
       weight: 99
       params:
@@ -42,12 +45,12 @@ params:
   enableSearch: true
   enableCodeCopy: true
   header:
-    layout: hamburger
     showTitle: true
   footer:
     showAppearanceSwitcher: true
   homepage:
     layout: page
+    showRecent: true
   article:
     showWordCount: true
 
