@@ -1,13 +1,12 @@
 baseURL: https://blog.john-humphries.com/
 languageCode: en-us
-title: JWH
+title: John Humphries
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
-enableEmoji: true
 mainsections: ["posts"]
 
 minify:
@@ -15,24 +14,25 @@ minify:
 
 taxonomies:
   topic: topics
-  tag: tags
+  subject: subjects
   series: series
 
 menu:
   main:
-    - name: About
-      url: about/
-      weight: 1
     - name: Posts
       pageRef: posts
-      weight: 5
-    - name: Tags
-      pageRef: tags
-      weight: 20
+      weight: 10
     - identifier: search
       weight: 99
       params:
         action: search
+  footer:
+    - name: About
+      pageRef: about
+      weight: 10
+    - name: Topics
+      pageRef: topics
+      weight: 20
 
 params:
   author:
@@ -46,7 +46,6 @@ params:
   enableCodeCopy: true
   header:
     showTitle: true
-    logo: logo.png
   footer:
     showAppearanceSwitcher: true
   homepage:
@@ -54,6 +53,8 @@ params:
     showRecent: true
   article:
     showWordCount: true
+  list:
+    groupByYear: false
 
 outputs:
   home:
