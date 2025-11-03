@@ -4,6 +4,6 @@ draft: true
 author: 'John Humphries'
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
 description: ''
-tags: []
-categories: ['{{ replace .Dir "/" "" }}']
+topics: []
+subjects: ['{{ replace .Dir "posts/" "" }}']
 ---
