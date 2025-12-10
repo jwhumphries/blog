@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Hugo
+public/
+resources/
+
+# Node/Bun
+node_modules/
+.pnpm-store/
+
+# Build artifacts
+*.log
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# GitHub
+.github/
+
+# Task
+Taskfile.yml
+
+# License
+LICENSE
+
+# AI
+.claude/
+CLAUDE.md
+AGENTS.md

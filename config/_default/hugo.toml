@@ -1,0 +1,28 @@
+baseURL = "https://blog.johnhumphries.dev/"
+languageCode = "en-us"
+title = "John Humphries"
+
+enableInlineShortcodes = true
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+mainsections = ["posts"]
+
+[minify]
+  disableXML = true
+
+[taxonomies]
+  topic = "topics"
+  subject = "subjects"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[caches.images]
+  dir = ":cacheDir/images"
+
+[module]
+[module.hugoVersion]
+  extended = true
+[[module.imports]]
+  path = "github.com/jwhumphries/shiloh"

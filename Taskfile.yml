@@ -1,0 +1,78 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  NAME: blog
+  WORKDIR: project
+  IMAGES:
+    [
+      dev,
+      builder,
+    ]
+  DEV_IMAGE: '{{.NAME}}:{{index .IMAGES 0}}'
+  BUILDER_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
+
+tasks:
+  default:
+    desc: Show available tasks
+    silent: true
+    cmds:
+      - task --list
+
+  # Internal tasks
+  docker-build:
+    internal: true
+    cmds:
+      - docker build --target {{.TARGET}} -t {{.NAME}}:{{.TARGET}} .
+
+  docker-run:
+    internal: true
+    cmds:
+      - docker run --rm {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.NAME}}:{{.TARGET}}
+
+  docker-run-ci:
+    internal: true
+    cmds:
+      - docker run --rm --user $(id -u):$(id -g) -e HOME=/tmp {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.NAME}}:{{.TARGET}}
+
+  clean-node-modules:
+    internal: true
+    cmds:
+      - rm -rf node_modules
+
+  # Public tasks
+  dev:
+    desc: Start development environment with live reload
+    cmds:
+      - echo "🎨 Starting development environment..."
+      - task: docker-build
+        vars: { TARGET: dev }
+      - defer: { task: clean-node-modules }
+      - task: docker-run
+        vars:
+          TARGET: dev
+          DOCKER_ARGS: -it -p 1313:1313
+          WORKDIR: project
+    silent: true
+
+  build:
+    desc: Build the site using Dagger
+    cmds:
+      - echo "🛠️ Building the site..."
+      - dagger -m .dagger call build --source . export --path ./public
+    silent: true
+
+  clean:
+    desc: Clean all Docker images and generated files
+    cmds:
+      - echo "🧹 Cleaning up..."
+      - docker rmi {{.NAME}}:dev {{.NAME}}:release {{.NAME}}:docs 2>/dev/null || true
+      - task: clean-node-modules
+      - rm hugo_stats.json
+      - rm package.json
+      - rm package-lock.json
+      - rm -rf public
+      - echo "✅ Cleanup complete"
+    silent: true
+    ignore_error: true
