@@ -6,7 +6,6 @@ enableInlineShortcodes: true
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
-buildExpired: false
 mainsections: ["posts"]
 
 minify:
@@ -38,23 +37,15 @@ params:
   author:
     name: John Humphries
     image: me.jpeg
-  colorScheme: congo
-  defaultThemecolor: '#FFFFFF'
-  defaultAppearance: light
-  autoSwitchAppearance: true
-  enableSearch: true
-  enableCodeCopy: true
-  header:
-    showTitle: true
-  footer:
-    showAppearanceSwitcher: true
-  homepage:
-    layout: page
-    showRecent: true
-  article:
-    showWordCount: true
+    links:
+      - github: https://github.com/jwhumphries/
+      - linkedin: www.linkedin.com/in/humphries96
   list:
     groupByYear: false
+  article:
+    showTableOfContents: false
+    showWordCount: true
+    showTaxonomies: true
 
 outputs:
   home:
@@ -67,4 +58,4 @@ caches:
 
 module:
   imports:
-    - path: github.com/jpanther/congo/v2
+    - path: github.com/jwhumphries/shiloh
