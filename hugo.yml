@@ -21,14 +21,14 @@ menu:
     - name: Posts
       pageRef: posts
       weight: 10
+    - name: About
+      pageRef: about
+      weight: 15
     - identifier: search
       weight: 99
       params:
         action: search
   footer:
-    - name: About
-      pageRef: about
-      weight: 10
     - name: Topics
       pageRef: topics
       weight: 20
@@ -36,10 +36,14 @@ menu:
 params:
   author:
     name: John Humphries
-    image: me.jpeg
+    image: me.png
     links:
       - github: https://github.com/jwhumphries/
       - linkedin: https://www.linkedin.com/in/humphries96
+  header:
+    logo: logo.png
+  footer:
+    showCopyright: false
   list:
     groupByYear: false
   article:
