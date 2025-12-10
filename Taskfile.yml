@@ -1,0 +1,73 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  NAME: blog
+  WORKDIR: project
+  IMAGES:
+    [
+      dev,
+      releaser,
+    ]
+  DEV_IMAGE: '{{.NAME}}:{{index .IMAGES 0}}'
+  RELEASE_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
+
+tasks:
+  docker-build-target:
+    internal: true
+    cmds:
+      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} .
+  docker-clean-image:
+    internal: true
+    cmds:
+      - docker rmi {{.DOCKER_IMAGE}}
+    silent: true
+    ignore_error: true
+  docker-clean-images:
+    internal: true
+    cmds:
+      - for: { var: IMAGES }
+        task: docker-clean-image
+        vars: { DOCKER_IMAGE: '{{.NAME}}:{{.ITEM}}' } 
+  clean-docker:
+    desc: Clean all images
+    cmds:
+      - echo "🧹 Cleaning Docker images..."
+      - task: docker-clean-images
+      - echo "✅ Cleaned Docker images"
+    silent: true
+  build-dev:
+    desc: Build development image
+    cmds:
+      - task: docker-build-target
+        vars:
+          DOCKER_TARGET: develop
+          DOCKER_IMAGE: '{{.DEV_IMAGE}}'
+  dev:
+    desc: Start development container and mount files
+    cmds:
+      - echo "🎨 Starting development environment in Docker..."
+      - echo "🛠️ Building dev image.."
+      - task: build-dev
+      - echo "💻 Starting dev image.."
+      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.DEV_IMAGE}}
+    silent: true
+  build-releaser:
+    internal: true
+    cmds:
+      - task: docker-build-target
+        vars:
+          DOCKER_TARGET: releaser
+          DOCKER_IMAGE: '{{.RELEASE_IMAGE}}'
+  release:
+    desc: Build the site
+    cmds:
+      - echo "🏭 Building blog..."
+      - echo "🛠️ Building releaser image.."
+      - task: build-releaser
+      - echo "📦 Running releaser image..."
+      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.RELEASE_IMAGE}}
+      - echo "✨ Built successfully!"
+    silent: true
+    
