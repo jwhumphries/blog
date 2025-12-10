@@ -39,7 +39,7 @@ params:
     image: me.jpeg
     links:
       - github: https://github.com/jwhumphries/
-      - linkedin: www.linkedin.com/in/humphries96
+      - linkedin: https://www.linkedin.com/in/humphries96
   list:
     groupByYear: false
   article:
