@@ -1,14 +1,18 @@
 ---
 title: "Posts"
 cascade:
-  showReadingTime: false
   showEdit: false
-  showDate: false
   showSummary: true
 ---
 
-{{< lead >}}
-A collection of my writings.
-{{< /lead >}}
+## Welcome to my blog
 
-My blog posts can generally be sorted into the following three categories. Check the [topics page]({{< ref "topics" >}}) for more specific attributes.
+{{< sentence-rotate sentence="Prepare to be" size="text-2xl" >}}
+Disappointed | text-primary
+Underwhelmed | text-secondary
+Let Down | bg-error text-error-content
+{{< /sentence-rotate >}}
+
+## It's a bit emtpy here...
+
+And that's okay. Hopefully I'll post some stuff soon.

@@ -1,0 +1,22 @@
+[author]
+  name = "John Humphries"
+  headline = "Just another programmer"
+  bio = """
+  I'm a DevOps engineer who is interested in anything and everything. I enjoy learning about new tools and new ways to build 📦 and ship 🚀.
+  """
+  image = "/me.png"
+
+[[author.links]]
+  github = "https://github.com/jwhumphries/"
+  linkedin = "https://www.linkedin.com/in/humphries96"
+
+[footer]
+  showCopyright = false
+
+[list]
+  groupByYear = false
+
+[article]
+  showWordCount = true
+  showTaxonomies = true
+  displayTaxonomies = ["topics", "subjects"]
