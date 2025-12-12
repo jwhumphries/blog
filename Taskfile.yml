@@ -8,10 +8,10 @@ vars:
   IMAGES:
     [
       dev,
-      releaser,
+      builder,
     ]
   DEV_IMAGE: '{{.NAME}}:{{index .IMAGES 0}}'
-  RELEASE_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
+  BUILDER_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
 
 tasks:
   docker-build-target:
@@ -53,21 +53,21 @@ tasks:
       - echo "💻 Starting dev image.."
       - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.DEV_IMAGE}}
     silent: true
-  build-releaser:
+  build-builder:
     internal: true
     cmds:
       - task: docker-build-target
         vars:
-          DOCKER_TARGET: releaser
-          DOCKER_IMAGE: '{{.RELEASE_IMAGE}}'
-  release:
+          DOCKER_TARGET: builder
+          DOCKER_IMAGE: '{{.BUILDER_IMAGE}}'
+  build:
     desc: Build the site
     cmds:
       - echo "🏭 Building blog..."
-      - echo "🛠️ Building releaser image.."
-      - task: build-releaser
-      - echo "📦 Running releaser image..."
-      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.RELEASE_IMAGE}}
+      - echo "🛠️ Building builder image.."
+      - task: build-builder
+      - echo "📦 Running builder image..."
+      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.BUILDER_IMAGE}}
       - echo "✨ Built successfully!"
     silent: true
     
