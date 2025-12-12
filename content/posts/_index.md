@@ -5,8 +5,14 @@ cascade:
   showSummary: true
 ---
 
-{{< lead >}}
-A collection of my writings.
-{{< /lead >}}
+## Welcome to my blog
 
-Check the [topics page]({{< ref "topics" >}}) for more specific attributes.
+{{< sentence-rotate sentence="Prepare to be" size="text-2xl" >}}
+Disappointed | text-primary
+Underwhelmed | text-secondary
+Let Down | bg-error text-error-content
+{{< /sentence-rotate >}}
+
+## It's a bit emtpy here...
+
+And that's okay. Hopefully I'll post some stuff soon.

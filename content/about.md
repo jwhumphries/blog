@@ -1,12 +1,11 @@
 ---
 date: '2025-10-24T20:29:47-04:00'
 draft: false
-author: 'John Humphries'
 title: 'About Me'
 ---
 
 {{< figure
-    src="me.jpeg"
+    src="/me.jpeg"
     alt="A picture of me"
     class="flex items-center rounded-full size-50"
     >}}

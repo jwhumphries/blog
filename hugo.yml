@@ -21,13 +21,9 @@ menu:
     - name: Posts
       pageRef: posts
       weight: 10
-    - name: About
+    - name: About Me
       pageRef: about
       weight: 15
-    - identifier: search
-      weight: 99
-      params:
-        action: search
   footer:
     - name: Topics
       pageRef: topics
@@ -36,12 +32,15 @@ menu:
 params:
   author:
     name: John Humphries
-    image: me.png
+    headline: Just another programmer
+    bio: |
+      I'm a DevOps engineer who is interested in anything and everything. I enjoy learning about new tools and new ways to build 📦 and ship 🚀. 
+    image: /me.png
     links:
       - github: https://github.com/jwhumphries/
       - linkedin: https://www.linkedin.com/in/humphries96
   header:
-    logo: logo.png
+    logo: /logo.png
   footer:
     showCopyright: false
   list:
