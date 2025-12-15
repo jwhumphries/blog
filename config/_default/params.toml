@@ -11,7 +11,7 @@
   linkedin = "https://www.linkedin.com/in/humphries96"
 
 [header]
-  logo = "/logo.png"
+  logo = "/logo.svg"
 
 [footer]
   showCopyright = false
