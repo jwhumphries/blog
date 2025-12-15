@@ -2,7 +2,7 @@
   name = "John Humphries"
   headline = "Just another programmer"
   bio = """
-  I'm a DevOps engineer who is interested in anything and everything. I enjoy learning about new tools and new ways to build and ship.
+  I'm a DevOps engineer who is interested in anything and everything. I enjoy learning about new tools and new ways to build 📦 and ship 🚀.
   """
   image = "/me.png"
 
