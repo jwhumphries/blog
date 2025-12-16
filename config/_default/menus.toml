@@ -12,8 +12,3 @@
   name = "Topics"
   pageRef = "topics"
   weight = 20
-
-[[footer]]
-  name = "Series"
-  pageRef = "series"
-  weight = 30

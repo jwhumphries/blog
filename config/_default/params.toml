@@ -10,9 +10,6 @@
   github = "https://github.com/jwhumphries/"
   linkedin = "https://www.linkedin.com/in/humphries96"
 
-[header]
-  logo = "/logo.svg"
-
 [footer]
   showCopyright = false
 
