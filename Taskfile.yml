@@ -14,60 +14,66 @@ vars:
   BUILDER_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
 
 tasks:
-  docker-build-target:
+  default:
+    desc: Show available tasks
+    silent: true
+    cmds:
+      - task --list
+
+  # Internal tasks
+  docker-build:
     internal: true
     cmds:
-      - docker build --target {{.DOCKER_TARGET}} -t {{.DOCKER_IMAGE}} .
-  docker-clean-image:
+      - docker build --target {{.TARGET}} -t {{.NAME}}:{{.TARGET}} .
+
+  docker-run:
     internal: true
     cmds:
-      - docker rmi {{.DOCKER_IMAGE}}
+      - docker run --rm {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.NAME}}:{{.TARGET}}
+
+  docker-run-ci:
+    internal: true
+    cmds:
+      - docker run --rm --user $(id -u):$(id -g) -e HOME=/tmp {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.NAME}}:{{.TARGET}}
+
+  clean-node-modules:
+    internal: true
+    cmds:
+      - rm -rf node_modules
+
+  # Public tasks
+  dev:
+    desc: Start development environment with live reload
+    cmds:
+      - echo "🎨 Starting development environment..."
+      - task: docker-build
+        vars: { TARGET: dev }
+      - defer: { task: clean-node-modules }
+      - task: docker-run
+        vars:
+          TARGET: dev
+          DOCKER_ARGS: -it -p 1313:1313
+          WORKDIR: project
+    silent: true
+
+  build:
+    desc: Sync Hugo module dependencies to package.json
+    cmds:
+      - echo "🛠️ Building  the site..."
+      - task: docker-build
+        vars: { TARGET: build }
+    silent: true
+
+  clean:
+    desc: Clean all Docker images and generated files
+    cmds:
+      - echo "🧹 Cleaning up..."
+      - docker rmi {{.NAME}}:dev {{.NAME}}:release {{.NAME}}:docs 2>/dev/null || true
+      - task: clean-node-modules
+      - rm hugo_stats.json
+      - rm package.json
+      - rm package-lock.json
+      - rm -rf public
+      - echo "✅ Cleanup complete"
     silent: true
     ignore_error: true
-  docker-clean-images:
-    internal: true
-    cmds:
-      - for: { var: IMAGES }
-        task: docker-clean-image
-        vars: { DOCKER_IMAGE: '{{.NAME}}:{{.ITEM}}' } 
-  clean-docker:
-    desc: Clean all images
-    cmds:
-      - echo "🧹 Cleaning Docker images..."
-      - task: docker-clean-images
-      - echo "✅ Cleaned Docker images"
-    silent: true
-  build-dev:
-    desc: Build development image
-    cmds:
-      - task: docker-build-target
-        vars:
-          DOCKER_TARGET: develop
-          DOCKER_IMAGE: '{{.DEV_IMAGE}}'
-  dev:
-    desc: Start development container and mount files
-    cmds:
-      - echo "🎨 Starting development environment in Docker..."
-      - echo "🛠️ Building dev image.."
-      - task: build-dev
-      - echo "💻 Starting dev image.."
-      - docker run --rm -it -p 1313:1313 -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.DEV_IMAGE}}
-    silent: true
-  build-builder:
-    internal: true
-    cmds:
-      - task: docker-build-target
-        vars:
-          DOCKER_TARGET: builder
-          DOCKER_IMAGE: '{{.BUILDER_IMAGE}}'
-  build:
-    desc: Build the site
-    cmds:
-      - echo "🏭 Building blog..."
-      - echo "🛠️ Building builder image.."
-      - task: build-builder
-      - echo "📦 Running builder image..."
-      - docker run --rm -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.BUILDER_IMAGE}}
-      - echo "✨ Built successfully!"
-    silent: true
-    

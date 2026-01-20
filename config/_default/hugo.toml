@@ -22,5 +22,7 @@ mainsections = ["posts"]
   dir = ":cacheDir/images"
 
 [module]
+[module.hugoVersion]
+  extended = true
 [[module.imports]]
   path = "github.com/jwhumphries/shiloh"

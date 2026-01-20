@@ -1,2 +1,10 @@
 github.com/jwhumphries/shiloh v0.0.0-20260114154606-b88f530b8637 h1:k48ByhgI59EfKx1WKYaOerqlvKd6MSV8PXHZvlTaDYI=
 github.com/jwhumphries/shiloh v0.0.0-20260114154606-b88f530b8637/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
+github.com/jwhumphries/shiloh v0.0.0-20260117142608-40f467008f8a h1:6poav95TEtU1rZlHtJdofGAHIWhecmi0y0QvQA8si0A=
+github.com/jwhumphries/shiloh v0.0.0-20260117142608-40f467008f8a/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
+github.com/jwhumphries/shiloh v0.0.0-20260118143354-e805a8cf4409 h1:gzDmQFO5DHUMZbt5OE9BALJpnnDxzZzV/eR9JQ2Npyc=
+github.com/jwhumphries/shiloh v0.0.0-20260118143354-e805a8cf4409/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
+github.com/jwhumphries/shiloh v0.0.1 h1:nsCLkAjTQNFb2TXlQ3UJs4lNZoaAzjf0+jLwvSWAgLs=
+github.com/jwhumphries/shiloh v0.0.1/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
+github.com/jwhumphries/shiloh v0.0.2 h1:ovOh7sD9dOfoN+VJ8/TS0Keci6P9KwQ6yFlTiofFehI=
+github.com/jwhumphries/shiloh v0.0.2/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
