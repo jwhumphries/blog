@@ -1,0 +1,6 @@
+{
+  "name": "blog-build",
+  "sdk": "go",
+  "source": ".",
+  "engineVersion": "v0.19.10"
+}

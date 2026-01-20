@@ -57,11 +57,10 @@ tasks:
     silent: true
 
   build:
-    desc: Sync Hugo module dependencies to package.json
+    desc: Build the site using Dagger
     cmds:
-      - echo "🛠️ Building  the site..."
-      - task: docker-build
-        vars: { TARGET: build }
+      - echo "🛠️ Building the site..."
+      - dagger -m .dagger call build --source . export --path ./public
     silent: true
 
   clean:
