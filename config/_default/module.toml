@@ -28,13 +28,13 @@
   target = 'assets/notwatching/hugo_stats.json'
 
 [[mounts]]
-  source = '../node_modules/@fontsource-variable/fira-code/files'
+  source = './node_modules/@fontsource-variable/fira-code/files'
   target = 'static/fonts/fira-code'
 
 [[mounts]]
-  source = '../node_modules/@fontsource-variable/lora/files'
+  source = './node_modules/@fontsource-variable/lora/files'
   target = 'static/fonts/lora'
 
 [[mounts]]
-  source = '../node_modules/@fontsource-variable/fraunces/files'
+  source = './node_modules/@fontsource-variable/fraunces/files'
   target = 'static/fonts/fraunces'
