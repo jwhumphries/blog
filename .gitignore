@@ -1,4 +1,22 @@
+# Hugo generated
 public/
-resources/
-.hugo_build.lock
+site/public/
+site/resources/
+site/.hugo_build.lock
+site/hugo_stats.json
+site/package.json
+site/package-lock.json
+site/node_modules/
+
+#Drafts
+site/drafts/
+
+# Go binary
+blog
+
+# OS files
 .DS_Store
+
+# IDE
+.idea/
+.vscode/

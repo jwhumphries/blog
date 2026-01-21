@@ -4,14 +4,6 @@ version: '3'
 
 vars:
   NAME: blog
-  WORKDIR: project
-  IMAGES:
-    [
-      dev,
-      builder,
-    ]
-  DEV_IMAGE: '{{.NAME}}:{{index .IMAGES 0}}'
-  BUILDER_IMAGE: '{{.NAME}}:{{index .IMAGES 1}}'
 
 tasks:
   default:
@@ -20,59 +12,77 @@ tasks:
     cmds:
       - task --list
 
-  # Internal tasks
-  docker-build:
-    internal: true
-    cmds:
-      - docker build --target {{.TARGET}} -t {{.NAME}}:{{.TARGET}} .
-
-  docker-run:
-    internal: true
-    cmds:
-      - docker run --rm {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.NAME}}:{{.TARGET}}
-
-  docker-run-ci:
-    internal: true
-    cmds:
-      - docker run --rm --user $(id -u):$(id -g) -e HOME=/tmp {{.DOCKER_ARGS}} -v "{{.USER_WORKING_DIR}}:/{{.WORKDIR}}" {{.NAME}}:{{.TARGET}}
-
-  clean-node-modules:
-    internal: true
-    cmds:
-      - rm -rf node_modules
-
-  # Public tasks
+  # Development tasks
   dev:
-    desc: Start development environment with live reload
+    desc: Start Hugo development server with live reload (in Docker)
+    dir: site
     cmds:
-      - echo "🎨 Starting development environment..."
-      - task: docker-build
-        vars: { TARGET: dev }
-      - defer: { task: clean-node-modules }
-      - task: docker-run
-        vars:
-          TARGET: dev
-          DOCKER_ARGS: -it -p 1313:1313
-          WORKDIR: project
+      - echo "🐳 Building dev container..."
+      - docker build --target dev -t blog-dev .
+      - echo "🚀 Starting Hugo development server..."
+      - echo "   Available at http://localhost:1313"
+      - echo "   Press Ctrl+C to stop"
+      - docker run --rm -it -p 1313:1313 -v "{{.TASKFILE_DIR}}/site:/project" blog-dev
     silent: true
 
+  # Build tasks
   build:
-    desc: Build the site using Dagger
+    desc: Build the Hugo site using Dagger
     cmds:
-      - echo "🛠️ Building the site..."
-      - dagger -m .dagger call build --source . export --path ./public
+      - echo "🛠️ Building Hugo site..."
+      - dagger call hugo-build --source . export --path ./public
     silent: true
 
+  lint:
+    desc: Run golangci-lint on Go code
+    cmds:
+      - echo "🔍 Running linter..."
+      - dagger call lint --source .
+    silent: true
+
+  test:
+    desc: Run Go tests
+    cmds:
+      - echo "🧪 Running tests..."
+      - dagger call test --source .
+    silent: true
+
+  # Container tasks
+  container:
+    desc: Build the container image using Dagger
+    cmds:
+      - echo "🐳 Building container image..."
+      - dagger call container --source . --git .git
+    silent: true
+
+  container-run:
+    desc: Build and run the container locally for testing
+    cmds:
+      - echo "🐳 Building and running container..."
+      - dagger call container --source . --git .git as-tarball export --path ./blog.tar
+      - |
+        IMAGE_ID=$(docker load -i blog.tar | sed -n 's/.*\(sha256:[a-f0-9]*\).*/\1/p')
+        docker tag $IMAGE_ID blog:latest
+      - rm blog.tar
+      - echo "🚀 Starting container on port 8080..."
+      - echo "   Metrics available at http://localhost:9101/metrics"
+      - echo "   Press Ctrl+C to stop"
+      - docker run --rm -p 8080:8080 -p 9101:9101 blog:latest
+    silent: true
+
+  # Clean tasks
   clean:
-    desc: Clean all Docker images and generated files
+    desc: Clean all generated files
     cmds:
       - echo "🧹 Cleaning up..."
-      - docker rmi {{.NAME}}:dev {{.NAME}}:release {{.NAME}}:docs 2>/dev/null || true
-      - task: clean-node-modules
-      - rm hugo_stats.json
-      - rm package.json
-      - rm package-lock.json
       - rm -rf public
+      - rm -rf site/public
+      - rm -rf site/resources
+      - rm -rf site/node_modules
+      - rm -f site/hugo_stats.json
+      - rm -f site/package.json
+      - rm -f site/package-lock.json
+      - rm -f blog
       - echo "✅ Cleanup complete"
     silent: true
     ignore_error: true

@@ -7,12 +7,3 @@ FROM hugo AS dev
 EXPOSE 1313
 COPY --chmod=755 scripts/dev.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
-FROM hugo AS builder
-COPY . .
-RUN echo "🔄 Syncing Hugo module dependencies..."
-RUN hugo mod npm pack
-RUN echo "📦 Installing npm dependencies..."
-RUN npm install
-RUN echo "🏗️ Building site..."
-CMD ["--gc", "--minify"]
