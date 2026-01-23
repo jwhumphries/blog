@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>jwhumphries/renovate-config"
+  ],
+  "baseBranchPatterns": [
+    "main"
+  ],
+  "ignorePaths": [
+    ".dagger/**"
+  ],
+  "minimumReleaseAge": null,
+  "platformAutomerge": true,
+  "packageRules": [
+    {
+      "description": "Automerge minor changes",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
+    }
+  ]
+}
