@@ -1,4 +1,4 @@
-FROM ghcr.io/jwhumphries/tailwindcss:latest@sha256:a4fdf32e156f84f0221a77b2c5afc2448a6b143b088df5e2d3e3fa6ac31f4656 AS tailwind
+FROM ghcr.io/jwhumphries/tailwindcss:latest@sha256:7c9c8f28e81d8c932abed855a35a4c9124bcdd5cb3e018385aed3900f6b91107 AS tailwind
 FROM ghcr.io/gohugoio/hugo:latest@sha256:9df7155233d97988517f0bf2a8b760fb229ecba0463bd29497393abb2d152cfa AS hugo
 
 COPY --from=tailwind /usr/local/bin/tailwindcss /usr/local/bin/
