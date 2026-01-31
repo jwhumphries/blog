@@ -12,3 +12,5 @@ github.com/jwhumphries/shiloh v1.0.0 h1:JLO+YfCO+OUIr2VuIUe2itr25fHhJ6GXwjNpD0GB
 github.com/jwhumphries/shiloh v1.0.0/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
 github.com/jwhumphries/shiloh v1.1.1 h1:Bq30R9TpvCJiBfvxSHAFxhP6pe9MzhyCLGwZvCGQi2A=
 github.com/jwhumphries/shiloh v1.1.1/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
+github.com/jwhumphries/shiloh v1.1.2 h1:AaCux+AzioDtcsRIHOtSpsCR15JHU4rboQ6gvYtxfLo=
+github.com/jwhumphries/shiloh v1.1.2/go.mod h1:yq3HyMiHqTWIerBV823BcilDbZx841QwOPdDI6cfHAo=
