@@ -68,19 +68,20 @@ func (m *BlogBuilder) HugoBuild(source *dagger.Directory) *dagger.Directory {
 // Lint runs golangci-lint on the Go server code.
 func (m *BlogBuilder) Lint(ctx context.Context, source *dagger.Directory) (string, error) {
 	// Create source with placeholder public dir for embed directive
-	sourceWithPublic := dag.Container().
-		From("alpine:3.21").
-		WithDirectory("/src", source).
-		WithExec([]string{"mkdir", "-p", "/src/public"}).
-		WithExec([]string{"sh", "-c", "echo '<!DOCTYPE html><html></html>' > /src/public/index.html"}).
-		Directory("/src")
+	sourceWithPublic := source.
+		WithNewFile("public/index.html", "<!DOCTYPE html><html></html>")
 
-	return dag.GolangciLint(dagger.GolangciLintOpts{
-		Version: "v2.8.0",
-	}).
-		WithModuleCache(dag.CacheVolume("go-mod-cache")).
-		WithLinterCache(dag.CacheVolume("golangci-lint-cache")).
-		Run(sourceWithPublic).
+	return dag.Container().
+		From("golangci/golangci-lint:v2.9.0-alpine@sha256:efea7fae4d772680c2c2dc3a067bde22c8c0344dde7e800d110589aaee6ce977").
+		WithEnvVariable("GOCACHE", "/go-build-cache").
+		WithEnvVariable("GOMODCACHE", "/go-mod-cache").
+		WithEnvVariable("GOLANGCI_LINT_CACHE", "/golangci-lint-cache").
+		WithMountedCache("/go-build-cache", dag.CacheVolume("go-build-cache")).
+		WithMountedCache("/go-mod-cache", dag.CacheVolume("go-mod-cache")).
+		WithMountedCache("/golangci-lint-cache", dag.CacheVolume("golangci-lint-cache")).
+		WithDirectory("/app", sourceWithPublic).
+		WithWorkdir("/app").
+		WithExec([]string{"golangci-lint", "run", "./..."}).
 		Stdout(ctx)
 }
 
