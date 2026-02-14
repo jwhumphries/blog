@@ -28,7 +28,7 @@ jobs:
       - name: Install Dagger
         uses: dagger/dagger-for-github@b81317a976cb7f7125469707321849737cd1b3bc # v7
         with:
-          version: "0.19.10"
+          version: "latest"
 
       - name: Log in to GHCR
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
