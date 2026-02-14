@@ -88,7 +88,7 @@ func (m *BlogBuilder) Lint(ctx context.Context, source *dagger.Directory) (strin
 // Test runs go tests on the server code.
 func (m *BlogBuilder) Test(ctx context.Context, source *dagger.Directory) (string, error) {
 	return dag.Container().
-		From("golang:1.25-alpine").
+		From("golang:1.26-alpine").
 		WithEnvVariable("GOCACHE", "/go-build-cache").
 		WithEnvVariable("GOMODCACHE", "/go-mod-cache").
 		WithMountedCache("/go-build-cache", dag.CacheVolume("go-build-cache")).
