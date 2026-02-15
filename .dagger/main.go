@@ -110,7 +110,7 @@ func (m *BlogBuilder) BuildBinary(source *dagger.Directory, publicDir *dagger.Di
 	)
 
 	return dag.Container().
-		From("golang:1.25-alpine").
+		From("golang:1.26-alpine").
 		WithEnvVariable("GOCACHE", "/go-build-cache").
 		WithEnvVariable("GOMODCACHE", "/go-mod-cache").
 		WithEnvVariable("CGO_ENABLED", "0").
