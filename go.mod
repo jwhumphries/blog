@@ -3,7 +3,7 @@ module github.com/jwhumphries/blog
 go 1.26
 
 require (
-	github.com/andybalholm/brotli v1.2.0
+	github.com/andybalholm/brotli v1.2.1
 	github.com/charmbracelet/log v0.4.2
 	github.com/prometheus/client_golang v1.23.2
 )
